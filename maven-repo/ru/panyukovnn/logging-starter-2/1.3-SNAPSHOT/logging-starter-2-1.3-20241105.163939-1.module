@@ -1,0 +1,76 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "ru.panyukovnn",
+    "module": "logging-starter-2",
+    "version": "1.3-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "logging-starter-2-1.3-SNAPSHOT.jar",
+          "url": "logging-starter-2-1.3-SNAPSHOT.jar",
+          "size": 9208,
+          "sha512": "8cc51d2e7708e50f894b308f62e3defbabc5b1c1f25961247be2b2ee96ecb4a5d3f03e106b581570c0df956141caee1cac327c80014b66bc6570577abc2ca458",
+          "sha256": "9768696144c3f4ec44f0d9bd6192bbebcba4c625eee9e01a8018d913a1894309",
+          "sha1": "adcfa16d1d26032976c24f02bdab1fdbc8dedfdd",
+          "md5": "4e39c6c483f4b9626ffc092881e18db6"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-web",
+          "version": {
+            "requires": "3.2.5"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-aop",
+          "version": {
+            "requires": "3.2.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "logging-starter-2-1.3-SNAPSHOT.jar",
+          "url": "logging-starter-2-1.3-SNAPSHOT.jar",
+          "size": 9208,
+          "sha512": "8cc51d2e7708e50f894b308f62e3defbabc5b1c1f25961247be2b2ee96ecb4a5d3f03e106b581570c0df956141caee1cac327c80014b66bc6570577abc2ca458",
+          "sha256": "9768696144c3f4ec44f0d9bd6192bbebcba4c625eee9e01a8018d913a1894309",
+          "sha1": "adcfa16d1d26032976c24f02bdab1fdbc8dedfdd",
+          "md5": "4e39c6c483f4b9626ffc092881e18db6"
+        }
+      ]
+    }
+  ]
+}
