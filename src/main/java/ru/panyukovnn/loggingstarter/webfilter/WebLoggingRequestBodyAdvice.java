@@ -28,6 +28,11 @@ public class WebLoggingRequestBodyAdvice extends RequestBodyAdviceAdapter {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+        // TODO
+        if (request.getRequestURI().contains("swagger")) {
+            return false;
+        }
+
         return true;
     }
 }

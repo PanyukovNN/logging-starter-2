@@ -1,10 +1,12 @@
 plugins {
     id 'java'
+    id "java-library"
+    id "org.springframework.boot" version '3.1.4'
     id 'maven-publish'
 }
 
 group = 'ru.panyukovnn'
-version = '1.3-SNAPSHOT'
+version = '1.4-SNAPSHOT'
 
 repositories {
     mavenLocal()
@@ -14,8 +16,16 @@ repositories {
 def springVersion = '3.2.5'
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
-    implementation "org.springframework.boot:spring-boot-starter-aop:${springVersion}"
+    api "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    api "org.springframework.boot:spring-boot-starter-aop:${springVersion}"
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.4'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springVersion}"
+}
+
+test {
+    useJUnitPlatform()
 }
 
 publishing {

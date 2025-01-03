@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.panyukovnn.loggingstarter.dto.RequestDirection;
 
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class LoggingService {
+
+    @Value("${logging.web-logging.log-body:true}")
+    private boolean logBody;
 
     private static final Logger log = LoggerFactory.getLogger(LoggingService.class);
 
@@ -34,7 +38,7 @@ public class LoggingService {
         String method = request.httpMethod().name();
         String requestURI = request.url();
         String headers = inlineHeaders(request.headers());
-        String body = new String(request.body(), StandardCharsets.UTF_8);
+        String body = logBody ? new String(request.body(), StandardCharsets.UTF_8) : "";
 
         log.info("Запрос: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, body);
     }
@@ -43,14 +47,18 @@ public class LoggingService {
         String method = request.getMethod();
         String requestURI = request.getRequestURI() + formatQueryString(request);
 
-        log.info("Тело запроса: {} {} {} {}", RequestDirection.IN, method, requestURI, body);
+        Object bodyToLog = logBody ? body : "";
+
+        log.info("Тело запроса: {} {} {} {}", RequestDirection.IN, method, requestURI, bodyToLog);
     }
 
     public void logResponse(HttpServletRequest request, HttpServletResponse response, String responseBody) {
         String method = request.getMethod();
         String requestURI = request.getRequestURI() + formatQueryString(request);
 
-        log.info("Ответ: {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), responseBody);
+        Object bodyToLog = logBody ? responseBody : "";
+
+        log.info("Ответ: {} {} {} {} body={}", RequestDirection.IN, method, requestURI, response.getStatus(), bodyToLog);
     }
 
     public void logFeignResponse(Response response, String responseBody) {
@@ -58,7 +66,9 @@ public class LoggingService {
         String method = response.request().httpMethod().name();
         int status = response.status();
 
-        log.info("Ответ: {} {} {} {} body={}", RequestDirection.OUT, method, url, status, responseBody);
+        Object bodyToLog = logBody ? responseBody : "";
+
+        log.info("Ответ: {} {} {} {} body={}", RequestDirection.OUT, method, url, status, bodyToLog);
     }
 
     private String inlineHeaders(HttpServletRequest request) {
